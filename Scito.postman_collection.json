@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "29524ce2-d432-c60f-e4fd-d97cf3b6aad7",
+		"name": "Scito",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login and forgot password",
+			"item": [
+				{
+					"name": "/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "# login email\n\n## Params\n\n| Name | Required | Description |\n| --- | --- | --- |\n| email | Yes | Email Address |\n| password | Yes | Password |\n\n--- \n\n## Response\n\n### Success\n\n```json\n{\n    \"success\": true,\n    \"data\" : {}\n}\n```\n\n### Error\n\n```json\n{\n    \"success\": false,\n    \"massages\": {\n        \"email\":\"Invalid email or password\"\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "new_password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "repeat_new_password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/forgot-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/verify-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/verify-token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"verify-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/verify-email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/verify-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "profile_image",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "passoword",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "retype_password",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "# register\n\n## Params\n\n| Name | Required | Description |\n| --- | --- | --- |\n| username | Yes | Username |\n| profile_image | Yes | Profile image |\n| email | Yes | Email Address |\n| password | Yes | Password |\n| retype_passowrd | Yes | Retyp passowrd |\n\n\n--- \n\n## Response\n\n### Success\n\n```json\n{\n    \"success\": true,\n    \"data\" : {}\n}\n```\n\n### Error\n\n```json\n{\n    \"success\": false,\n    \"massages\": {\n        \"email\":\"The Email Address is in an invalid format\"\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/confirm-email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/confirm-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"confirm-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CMS",
+			"item": [
+				{
+					"name": "/admins/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4662332a-56ad-4bd1-a657-c13ea2f10643",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"token\", jsonData.token);",
+									"",
+									"var token = postman.getGlobalVariable(\"token\");",
+									"console.log(token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/admins/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admins",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admins",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ca80f3c-d9eb-402f-ae90-3edb8f374fef",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"tests[\"verify name[0]\"] = jsonData.data[0].name === \"Admin\";",
+									"tests[\"verify email[0]\"] = jsonData.data[0].email === \"admin@admin.com\";",
+									"tests[\"verify name[1]\"] = jsonData.data[1].name === \"ScitoAdmin\";",
+									"tests[\"verify email[1]\"] = jsonData.data[1].email === \"admin@scito.com\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/admins",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload file",
+			"item": [
+				{
+					"name": "/upload-profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_image",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload-profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
